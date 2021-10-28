@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "sm4"
+version = "0.1.0"
+description = ""
+authors = ["ZelKnow <shenghuang@stu.pku.edu.cn>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+yapf = "^0.31.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
