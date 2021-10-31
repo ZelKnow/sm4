@@ -5,7 +5,9 @@ description = ""
 authors = ["ZelKnow <shenghuang@stu.pku.edu.cn>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8,<3.11"
+Pillow = "^8.4.0"
+numpy = "^1.21.3"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
