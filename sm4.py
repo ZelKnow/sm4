@@ -194,6 +194,10 @@ class CryptSM4(object):
         Returns:
             int: 输出
         """
+        try:
+            cipher_text = unhexlify(cipher_text)
+        except:
+            pass
         return unpadding(self._crypt_ECB(cipher_text, DECRYPT))
 
     def _crypt_CBC(self, input, iv, mode=ENCRYPT):
@@ -252,12 +256,12 @@ if __name__ == '__main__':
     parser.add_argument('mode', choices=['ecb', 'cbc'], help='加密模式')
     parser.add_argument('source', help='加密/解密目标')
     parser.add_argument('key', help='密钥')
-    parser.add_argument('--iv', help='初始化向量')
+    parser.add_argument('--iv', help='初始化向量，cbc模式使用')
     parser.add_argument('--source_type',
                         choices=['input', 'bin_file', 'image'],
                         help='加密目标类型',
                         default='input')
-    parser.add_argument('--output', help='输出文件名')
+    parser.add_argument('--output', help='输出文件名，如不指定则输出至标准输出流')
     args = parser.parse_args()
     c = CryptSM4()
     c.set_key(args.key)
@@ -299,4 +303,7 @@ if __name__ == '__main__':
         with open(args.output, "wb") as f:
             f.write(output)
     else:
-        print(output)
+        try:
+            print(output.decode())
+        except:
+            print(hexlify(output).decode())
