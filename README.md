@@ -4,6 +4,8 @@
 
 ## 依赖
 
+要求```python```版本```>=3.8```
+
 ```
 poetry install
 ```
@@ -27,11 +29,13 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --iv IV               初始化向量
+  --iv IV               初始化向量，用于cbc模式
   --source_type {input,bin_file,image}
                         加密目标类型
-  --output OUTPUT       输出文件名
+  --output OUTPUT       输出文件名，如不指定输出到标准输出流
 ```
+
+加密时，如使用标准输入，默认作为字符串处理。若在明文前加上```0x```，则将其作为16进制数处理。加密输出为16进制数。
 
 ### 示例
 
@@ -39,6 +43,7 @@ optional arguments:
   ```
   python3 sm4.py encrypt ecb eifjweqorifjerioqfjioerwjferwjiofjoerwif abcdefghijklmnop
   # 4cb15b0121253054c250a960eb23d27cc142417c983cd76bc25102cdf663503bf38f332182bdbb09b9ec903703453cf5
+
   python3 sm4.py decrypt ecb 4cb15b0121253054c250a960eb23d27cc142417c983cd76bc25102cdf663503bf38f332182bdbb09b9ec903703453cf5 abcdefghijklmnop
   # eifjweqorifjerioqfjioerwjferwjiofjoerwif
   ```
@@ -50,4 +55,4 @@ optional arguments:
 - 使用CBC模式对图片进行加密
   ```
   python3 sm4.py encrypt cbc logo.png aghilasdfgsdsdfg --source_type image --output test.png --iv abcdefghi
-  ```
+  ``
