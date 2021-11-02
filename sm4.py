@@ -247,6 +247,10 @@ class CryptSM4(object):
         Returns:
             int: 输出
         """
+        try:
+            cipher_text = unhexlify(cipher_text)
+        except:
+            pass
         return unpadding(self._crypt_CBC(cipher_text, iv, DECRYPT))
 
 
@@ -271,6 +275,8 @@ if __name__ == '__main__':
 
     if args.source_type == 'input':
         input = args.source
+        if input[:2].lower() == '0x':
+            input = int(input[2:], 16)
     elif args.source_type == 'bin_file':
         with open(args.source, 'rb') as f:
             input = f.read()

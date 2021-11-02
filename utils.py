@@ -9,6 +9,8 @@
 """
 __author__ = "ZelKnow"
 
+from binascii import hexlify, unhexlify
+
 BLOCK_BYTE = 16  # 每个Block的字节数
 BLOCK_HEX = 2 * BLOCK_BYTE  # 每个Block的十六进制位数
 
@@ -69,7 +71,7 @@ def padding(text):
     """对输入数据进行padding对齐操作
 
     Args:
-        text (str or bytes): 输入数据
+        text (int, str or bytes): 输入数据
 
     Raises:
         TypeError: 输入数据类型错误
@@ -77,7 +79,10 @@ def padding(text):
     Returns:
         bytes: padding对齐后的字节表示
     """
-    if isinstance(text, str):
+    if isinstance(text, int):
+        text = unhexlify(num2hex(text))
+
+    elif isinstance(text, str):
         text = text.encode(encoding='UTF8')
 
     if not isinstance(text, bytes):
